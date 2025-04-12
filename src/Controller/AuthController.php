@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AuthController extends AbstractController
 {
-    #[Route('/api/auth/check', name: 'api_auth_check', methods: ['POST'])]
+    #[Route('/api/auth/check', name: 'api_auth_check', methods: ['POST', 'OPTIONS'])]
     #[OA\Post(
         path: '/api/auth/check',
         summary: 'Vérifie les credentials de l\'utilisateur',
@@ -53,6 +53,15 @@ class AuthController extends AbstractController
     )]
     public function checkAuthentication(Request $request): JsonResponse
     {
+        // Gestion des requêtes OPTIONS pour CORS
+        if ($request->getMethod() === 'OPTIONS') {
+            return new JsonResponse(null, Response::HTTP_OK, [
+                'Access-Control-Allow-Origin' => '*',
+                'Access-Control-Allow-Methods' => 'POST, OPTIONS',
+                'Access-Control-Allow-Headers' => 'Content-Type',
+            ]);
+        }
+
         $data = json_decode($request->getContent(), true);
         
         // TODO: Implémenter la logique d'authentification
@@ -60,6 +69,10 @@ class AuthController extends AbstractController
         return new JsonResponse([
             'success' => true,
             'message' => 'Authentification réussie'
+        ], Response::HTTP_OK, [
+            'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Methods' => 'POST, OPTIONS',
+            'Access-Control-Allow-Headers' => 'Content-Type',
         ]);
     }
 } 
