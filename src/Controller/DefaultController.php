@@ -1,1 +1,18 @@
-<?php\n\nnamespace App\Controller;\n\nuse Symfony\Bundle\FrameworkBundle\Controller\AbstractController;\nuse Symfony\Component\HttpFoundation\Response;\nuse Symfony\Component\Routing\Annotation\Route;\n\nclass DefaultController extends AbstractController\n{\n    #[Route('/', name: 'app_home')]\n    public function index(): Response\n    {\n        return $this->render('default/index.html.twig', [\n            'message' => 'Bienvenue sur notre application d\'authentification!'\n        ]);\n    }\n}
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class DefaultController extends AbstractController
+{
+    #[Route('/', name: 'app_home')]
+    public function index(): Response
+    {
+        return $this->render('default/index.html.twig', [
+            'message' => 'Bienvenue sur notre application d\'authentification!'
+        ]);
+    }
+}
