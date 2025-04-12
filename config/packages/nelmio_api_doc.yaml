@@ -1,0 +1,14 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: API d'authentification
+            description: API pour la gestion de l'authentification
+            version: 1.0.0
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api/(?!doc$)
+    html_config:
+        swagger_ui_config:
+            display_doc_expansion: none
+            persist_authorization: true
+            deep_linking: true
